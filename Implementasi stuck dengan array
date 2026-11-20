@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+const int MAX_CAPACITY = 100;
+
+class Stack {
+private:
+    int data[MAX_CAPACITY]; 
+    int topIndex;       
+
+public:
+    Stack() {
+        topIndex = -1;
+    }
+   
+    bool isEmpty() {
+        return topIndex == -1;
+    }
+
+    bool isFull() {
+        return topIndex == MAX_CAPACITY - 1;
+    }
+
+    int size() {
+        return topIndex + 1;
+    }
+
+    void push(int nilai) {
+        if (isFull()) {
+            cout << "[Error] Stack penuh! Tidak bisa menambahkan " << nilai << endl;
+            return;
+        }
+        topIndex++;
+        data[topIndex] = nilai;
+        cout << "Push: " << nilai << " berhasil ditambahkan." << endl;
+    }
+
+    int pop() {
+        if (isEmpty()) {
+            cout << "[Error] Stack kosong! Tidak ada elemen yang bisa di-pop." << endl;
+            return -1; 
+        }
+        int nilaiTeratas = data[topIndex];
+        topIndex--;
+        return nilaiTeratas;
+    }
+    
+    int peek() {
+        if (isEmpty()) {
+            cout << "[Error] Stack kosong! Tidak ada elemen untuk dilihat." << endl;
+            return -1; 
+        }
+        return data[topIndex];
+    }
+};
+
+int main() {
+    Stack tumpukan;
+
+    cout << "=== PENGUJIAN STACK DENGAN ARRAY ===" << endl;
+    cout << "Apakah stack kosong? " << (tumpukan.isEmpty() ? "Ya" : "Tidak") << endl;
+
+    cout << "\n--- Mencoba Pop dan Peek saat kosong ---" << endl;
+    tumpukan.pop();
+    tumpukan.peek();
+
+    cout << "\n--- Menambahkan Data (Push) ---" << endl;
+    tumpukan.push(10);
+    tumpukan.push(20);
+    tumpukan.push(30);
+
+    cout << "\n--- Cek Ukuran & Elemen Teratas ---" << endl;
+    cout << "Jumlah elemen (size): " << tumpukan.size() << endl;
+    cout << "Elemen teratas (peek): " << tumpukan.peek() << endl;
+
+    // 4. Uji operasi Pop
+    cout << "\n--- Menghapus Data (Pop) ---" << endl;
+    cout << "Pop elemen: " << tumpukan.pop() << endl;
+    cout << "Elemen teratas sekarang (peek): " << tumpukan.peek() << endl;
+    cout << "Jumlah elemen sekarang (size): " << tumpukan.size() << endl;
+
+    return 0;
+}
